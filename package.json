@@ -1,0 +1,56 @@
+{
+  "name": "object-crumble",
+  "description": "Creative ways to cook your object",
+  "keywords": ["object"],
+  "version": "0.1.0",
+  "author": {
+    "name": "Olivier Huin",
+    "url": "https://github.com/olih"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/flarebyte/object-crumble",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flarebyte/object-crumble.git"
+  },
+  "bugs": "https://github.com/flarebyte/object-crumble/issues",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.mjs",
+      "default": "./dist/src/index.mjs",
+      "types": "./dist/src"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
+  },
+  "files": [
+    "dist/src",
+    "src"
+  ],
+  "bin": {},
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "lint": "baldrick lint check",
+    "lint:fix": "baldrick lint fix",
+    "lint:ci": "baldrick lint ci",
+    "test": "baldrick test check",
+    "test:fix": "baldrick test fix",
+    "test:cov": "baldrick test cov",
+    "test:ci": "baldrick test ci",
+    "reset": "rm -rf dist; rm -rf report",
+    "build": "yarn reset;tsc --outDir dist",
+    "ready": "yarn lint && yarn test:cov && yarn outdated",
+    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT",
+    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "baldrick-dev-ts": "^0.8.5",
+    "typescript": "^4.5.4"
+  },
+  "peerDependencies": {}
+}
