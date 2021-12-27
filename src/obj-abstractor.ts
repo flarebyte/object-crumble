@@ -1,32 +1,37 @@
-import { CrumbleAbstractedObject, StringAbstractionRule, CrumbleValue, CrumbleObject } from './model';
+import {
+  CrumbleAbstractedObject,
+  StringAbstractionRule,
+  CrumbleValue,
+  CrumbleObject,
+} from './model';
+import {
+  isCrumbleArray,
+  isCrumbleObject,
+  isPrimitive,
+  isString,
+} from './type-checker';
 
-const someUrl: StringAbstractionRule = (value: string) =>
-  value.startsWith('http://') || value.startsWith('https://') ? 'url' : '';
-export const anyOfString =
-  (name: string, options: string[]) => (value: string) =>
-    options.includes(value) ? name : '';
-
-export const abstractionRules = [someUrl];
-
-const applyRulesToEntry =
+const applyRulesToPrimitiveEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>
   (keyValue: [string, CrumbleValue]): CrumbleAbstractedObject => {
     const [childPath, value] = keyValue;
     const path = `${prefix}${childPath}`;
     const defaultValue = { path, kind: typeof value };
-    if (typeof value !== 'string') {
+    if (!isString(value)) {
       return defaultValue;
     }
-    const triggered = rules
-      .map((rule) => rule(value))
-      .filter((v) => v.length > 0);
-    return triggered.length === 0 ? defaultValue : { path, kind: triggered[0] };
+    const triggered = rules.map((rule) => rule(value)).filter(Boolean);
+    return triggered[0] ? { path, kind: triggered[0] } : defaultValue;
   };
 
 const applyRulesToArrayEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>
-  (keyValue: [string, CrumbleValue[]]): CrumbleAbstractedObject => {
-    const [childPath, values] = keyValue;
+  ([childPath, values]: [string, CrumbleValue]): CrumbleAbstractedObject => {
+    if (!isCrumbleArray(values)) {
+      throw new Error(
+        `values should be an array not a ${typeof values}`
+      );
+    }
     const path = `${prefix}${childPath}`;
     if (values.length === 0) {
       return { path, kind: 'array/empty' };
@@ -34,9 +39,7 @@ const applyRulesToArrayEntry =
       const firstOne = values[0];
       const kindOfFirst = typeof firstOne;
       if (typeof firstOne === 'string') {
-        const triggered = rules
-          .map((rule) => rule(firstOne))
-          .filter((v) => v.length > 0);
+        const triggered = rules.map((rule) => rule(firstOne)).filter(Boolean);
         return triggered.length === 0
           ? { path, kind: `array/${kindOfFirst}` }
           : { path, kind: `array/${triggered[0]}` };
@@ -45,29 +48,25 @@ const applyRulesToArrayEntry =
       }
     }
   };
-
-const isObjectEntry = (keyValue: [string, CrumbleValue]): boolean =>
-  !Array.isArray(keyValue[1]) && typeof keyValue[1] === 'object';
-
-const isArrayEntry = (keyValue: [string, CrumbleValue]): boolean =>
-  Array.isArray(keyValue[1]);
-
-const isBasicEntry = (keyValue: [string, CrumbleValue]): boolean =>
-  !(isObjectEntry(keyValue) || isArrayEntry(keyValue));
-
+/**
+ * Convert any object to an abstract representation of the object structure
+ * @param rules 
+ * @param prefix 
+ * @returns 
+ */
 export const abstractObject =
   (rules: StringAbstractionRule[], prefix = '') =>
   (value: CrumbleObject): CrumbleAbstractedObject[] => {
     const results = Object.entries(value)
-      .filter(isBasicEntry)
-      .map(applyRulesToEntry(prefix, rules));
+      .filter((kv) => isPrimitive(kv[1]))
+      .map(applyRulesToPrimitiveEntry(prefix, rules));
     const arrayResults = Object.entries(value)
-      .filter(isArrayEntry)
+      .filter((kv) => isCrumbleArray(kv[1]))
       .map(applyRulesToArrayEntry(prefix, rules));
     const objResults = Object.entries(value)
-      .filter(isObjectEntry)
-      .flatMap((keyValue) =>
-        abstractObject(rules, `${prefix}${keyValue[0]}.`)(keyValue[1])
+      .filter((kv) => isCrumbleObject(kv[1]))
+      .flatMap(([key, objValue]) =>
+        abstractObject(rules, `${prefix}${key}.`)(objValue as CrumbleObject)
       );
     return [...results, ...arrayResults, ...objResults];
   };
