@@ -1,3 +1,4 @@
+import { CrumbleValue, MutateValueRule } from '../src/model';
 import {
   findFieldValue,
   pathsOfSelfOrAncestors,
@@ -5,7 +6,7 @@ import {
   transformFieldValue,
 } from '../src/obj-path-utils';
 
-describe('Object Mutator', () => {
+describe('Object Path Utils', () => {
   describe('findFieldValue', () => {
     const asset = {
       name: 'value-of-name',
@@ -108,7 +109,8 @@ describe('Object Mutator', () => {
       },
     };
 
-    const transfString = (value: string) => value + '_';
+    const transfString: MutateValueRule = (value: CrumbleValue) =>
+      typeof value === 'string' ? value + '_' : value;
 
     it('transform field at the root', () => {
       const actual = transformFieldValue('name', transfString, asset);
