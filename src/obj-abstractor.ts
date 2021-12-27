@@ -1,4 +1,4 @@
-import { CrumbleAbstractedObject, StringAbstractionRule, CrumbleValue, CrumbleObject } from './obj-tranf-model';
+import { CrumbleAbstractedObject, StringAbstractionRule, CrumbleValue, CrumbleObject } from './model';
 
 const someUrl: StringAbstractionRule = (value: string) =>
   value.startsWith('http://') || value.startsWith('https://') ? 'url' : '';
@@ -46,10 +46,10 @@ const applyRulesToArrayEntry =
     }
   };
 
-export const isObjectEntry = (keyValue: [string, CrumbleValue]): boolean =>
+const isObjectEntry = (keyValue: [string, CrumbleValue]): boolean =>
   !Array.isArray(keyValue[1]) && typeof keyValue[1] === 'object';
 
-export const isArrayEntry = (keyValue: [string, CrumbleValue]): boolean =>
+const isArrayEntry = (keyValue: [string, CrumbleValue]): boolean =>
   Array.isArray(keyValue[1]);
 
 const isBasicEntry = (keyValue: [string, CrumbleValue]): boolean =>

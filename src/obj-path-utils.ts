@@ -1,4 +1,4 @@
-import { CrumbleValue, CrumbleObject } from './obj-tranf-model';
+import { CrumbleValue, CrumbleObject } from './model';
 
 export const findFieldValue = (path: string, value: CrumbleObject): CrumbleValue => {
   const [first, ...rest] = path.split('.');

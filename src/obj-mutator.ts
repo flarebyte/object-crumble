@@ -4,7 +4,7 @@ import {
   CrumbleFieldMutation,
   CrumbleValue,
   CrumbleObject,
-} from './obj-tranf-model';
+} from './model';
 
 const unusualChar = '🤢';
 
