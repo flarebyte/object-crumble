@@ -29,6 +29,8 @@ export interface CrumbleAbstractedObject {
 
 export type MutateValueRule = (value: CrumbleValue) => CrumbleValue;
 
+export type MutateStringRule = (value: string) => string;
+
 /**
  * A mutation rule that can be applied to a CrumbleValue
  */

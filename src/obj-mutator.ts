@@ -4,6 +4,7 @@ import {
   CrumbleFieldMutation,
   CrumbleValue,
   CrumbleObject,
+  MutateStringRule,
 } from './model';
 
 const unusualChar = '🤢';
@@ -14,6 +15,23 @@ const identityRule: CrumbleFieldMutation = {
   rule: (value: CrumbleValue) => value,
 };
 
+const stringToMutateValueRule =
+  (stringMutate: MutateStringRule) =>
+  (value: CrumbleValue): CrumbleValue => {
+    if (typeof value !== 'string') {
+      throw new Error('The value should have been a string');
+    }
+    return stringMutate(value);
+  };
+const booleanToMutateValueRule =
+  (boolMutate: (b: boolean) => boolean) =>
+  (value: CrumbleValue): CrumbleValue => {
+    if (typeof value !== 'boolean') {
+      throw new Error('The value should have been a boolean');
+    }
+    return boolMutate(value);
+  };
+
 export const mutatorRules: CrumbleFieldMutation[] = [
   {
     name: 'string => empty',
@@ -23,18 +41,21 @@ export const mutatorRules: CrumbleFieldMutation[] = [
   {
     name: 'string => large',
     fieldKind: 'string',
-    rule: (value: string) =>
-      value.length === 0 ? 'z'.repeat(10000) : value.repeat(5000),
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) =>
+        v.length === 0 ? 'z'.repeat(10000) : v.repeat(5000)
+      )(value),
   },
   {
     name: 'string => unusual char',
     fieldKind: 'string',
-    rule: (value: string) => `${value}${unusualChar}`,
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}${unusualChar}`)(value),
   },
   {
     name: 'boolean => flip',
     fieldKind: 'boolean',
-    rule: (value: boolean) => !value,
+    rule: (value: CrumbleValue) => booleanToMutateValueRule((v) => !v)(value),
   },
   {
     name: 'number => zero',
@@ -59,12 +80,14 @@ export const mutatorRules: CrumbleFieldMutation[] = [
   {
     name: 'url => large',
     fieldKind: 'url',
-    rule: (value: string) => `${value}/${'/abc'.repeat(500)}`,
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}/${'/abc'.repeat(500)}`)(value),
   },
   {
     name: 'url => unusual char',
     fieldKind: 'url',
-    rule: (value: string) => `${value}/${unusualChar}`,
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}/${unusualChar}`)(value),
   },
 ];
 
