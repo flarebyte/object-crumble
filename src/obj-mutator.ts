@@ -1,0 +1,102 @@
+import { transformFieldValue } from './obj-path-utils';
+import {
+  OakObjApplicableMutation,
+  CrumbleFieldMutation,
+  CrumbleValue,
+  CrumbleObject,
+  MutateStringRule,
+} from './model';
+
+const unusualChar = '🤢';
+
+const identityRule: CrumbleFieldMutation = {
+  name: 'identity',
+  fieldKind: 'any',
+  rule: (value: CrumbleValue) => value,
+};
+
+const stringToMutateValueRule =
+  (stringMutate: MutateStringRule) =>
+  (value: CrumbleValue): CrumbleValue => {
+    if (typeof value !== 'string') {
+      throw new Error('The value should have been a string');
+    }
+    return stringMutate(value);
+  };
+const booleanToMutateValueRule =
+  (boolMutate: (b: boolean) => boolean) =>
+  (value: CrumbleValue): CrumbleValue => {
+    if (typeof value !== 'boolean') {
+      throw new Error('The value should have been a boolean');
+    }
+    return boolMutate(value);
+  };
+
+export const mutatorRules: CrumbleFieldMutation[] = [
+  {
+    name: 'string => empty',
+    fieldKind: 'string',
+    rule: () => '',
+  },
+  {
+    name: 'string => large',
+    fieldKind: 'string',
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) =>
+        v.length === 0 ? 'z'.repeat(10000) : v.repeat(5000)
+      )(value),
+  },
+  {
+    name: 'string => unusual char',
+    fieldKind: 'string',
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}${unusualChar}`)(value),
+  },
+  {
+    name: 'boolean => flip',
+    fieldKind: 'boolean',
+    rule: (value: CrumbleValue) => booleanToMutateValueRule((v) => !v)(value),
+  },
+  {
+    name: 'number => zero',
+    fieldKind: 'number',
+    rule: () => 0,
+  },
+  {
+    name: 'number => big',
+    fieldKind: 'number',
+    rule: () => 1007199254740991,
+  },
+  {
+    name: 'number => negative',
+    fieldKind: 'number',
+    rule: () => -10,
+  },
+  {
+    name: 'url => empty',
+    fieldKind: 'url',
+    rule: () => '',
+  },
+  {
+    name: 'url => large',
+    fieldKind: 'url',
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}/${'/abc'.repeat(500)}`)(value),
+  },
+  {
+    name: 'url => unusual char',
+    fieldKind: 'url',
+    rule: (value: CrumbleValue) =>
+      stringToMutateValueRule((v) => `${v}/${unusualChar}`)(value),
+  },
+];
+
+export const mutateObject =
+  (rules: CrumbleFieldMutation[]) =>
+  (mutation: OakObjApplicableMutation) =>
+  (content: CrumbleObject): CrumbleObject => {
+    const rule = (
+      rules.find((r) => r.name === mutation.mutationName) || identityRule
+    ).rule;
+    return transformFieldValue(mutation.path, rule, content);
+  };
