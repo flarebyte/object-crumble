@@ -9,7 +9,7 @@ export type CrumblePrimitive =
   | boolean
   | symbol
   | bigint
-  | Function;
+  | Function; // eslint-disable-line @typescript-eslint/ban-types
 
 /**
  * An javascript object

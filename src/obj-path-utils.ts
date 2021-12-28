@@ -120,8 +120,7 @@ export const setFieldValue = (
   ];
   const result = mergeAlongPath(updated);
   if (!isCrumbleObject(result.obj)) {
-    throw new Error("The result should be the root object");
-    
+    throw new Error('The result should be the root object');
   }
   return result.obj;
 };

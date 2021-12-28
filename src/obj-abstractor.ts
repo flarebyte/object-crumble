@@ -28,9 +28,7 @@ const applyRulesToArrayEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>
   ([childPath, values]: [string, CrumbleValue]): CrumbleAbstractedObject => {
     if (!isCrumbleArray(values)) {
-      throw new Error(
-        `values should be an array not a ${typeof values}`
-      );
+      throw new Error(`values should be an array not a ${typeof values}`);
     }
     const path = `${prefix}${childPath}`;
     if (values.length === 0) {
@@ -50,9 +48,9 @@ const applyRulesToArrayEntry =
   };
 /**
  * Convert any object to an abstract representation of the object structure
- * @param rules 
- * @param prefix 
- * @returns 
+ * @param rules
+ * @param prefix
+ * @returns
  */
 export const abstractObject =
   (rules: StringAbstractionRule[], prefix = '') =>
