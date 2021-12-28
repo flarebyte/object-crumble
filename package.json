@@ -46,7 +46,7 @@
     "ready": "yarn lint && yarn test:cov && yarn outdated",
     "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT",
     "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT",
-    "doc": "npx typedoc --json typedoc.json --pretty src/index.ts"
+    "doc": "npx typedoc --json doc.json --pretty src/index.ts"
   },
   "dependencies": {},
   "devDependencies": {
