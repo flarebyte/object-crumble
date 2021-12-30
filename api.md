@@ -15,43 +15,59 @@ abstractObject({name: "Jane"})
 
 ### Parameters
 
-* rules: Array of `StringAbstractionRule`: a list of rules
+* rules: Array of `StringAbstractionRule`: a list of rules used to infer the kind of value of each property in the object
 
-* prefix: `string`: a prefix
+* prefix: `string`: path of the object in the enclosing object, or empty if none
 
 ### Returns
 
-an abstracted object
+an array of `CrumbleAbstractedValue` representing each `path` `kind` pair.
 
 
 ## anyOfString
 
-See [string-abstractor.ts - L6](src/string-abstractor.ts)
+See [string-abstractor.ts - L19](src/string-abstractor.ts)
 
-fixme: Adds a description
+Detect a a string from a given list of string
 
 ### Parameters
 
-* name: `string`: fixme: Adds a description
+* name: `string`: the keyword to return if the detection happens
 
-* options: Array of `string`: fixme: Adds a description
+* options: Array of `string`: a list of string that would satisfy the detection
+
+### Returns
+
+the `name` keyword or false
+
 
 ## mutateObject
 
-See [obj-mutator.ts - L94](src/obj-mutator.ts)
+See [obj-mutator.ts - L104](src/obj-mutator.ts)
 
-fixme: Adds a description
+Mutates an object applying a list of mutation.
+We are using currying to provide the list of mutations rules.
+Only a single mutation is applied to facilitate the studying of the impact.
 
 ### Parameters
 
-* rules: Array of `CrumbleFieldMutation`: fixme: Adds a description
+* rules: Array of `CrumbleFieldMutation`: a list of rules used to infer the kind of value of each property in the object
+
+### Returns
+
+a `CrumbleObject` representing most javascript objects
+
 
 ## someUrl
 
-See [string-abstractor.ts - L3](src/string-abstractor.ts)
+See [string-abstractor.ts - L9](src/string-abstractor.ts)
 
-fixme: Adds a description
+Detect an url
 
 ### Parameters
 
-* value: `string`: fixme: Adds a description
+* value: `string`: the text to check
+
+### Returns
+
+the `url` keyword or false
