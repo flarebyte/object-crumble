@@ -39,7 +39,7 @@
 			"sources": [
 				{
 					"fileName": "obj-abstractor.ts",
-					"line": 55,
+					"line": 58,
 					"character": 13
 				}
 			],
@@ -51,8 +51,8 @@
 					"kindString": "Call signature",
 					"flags": {},
 					"comment": {
-						"shortText": "Convert any object to an abstract representation of the object structure",
-						"returns": "\n"
+						"shortText": "Convert any object to an abstract representation of the object structure\n```\nabstractObject({name: \"Jane\"})\n```",
+						"returns": "an abstracted object\n"
 					},
 					"parameters": [
 						{
@@ -61,7 +61,9 @@
 							"kind": 32768,
 							"kindString": "Parameter",
 							"flags": {},
-							"comment": {},
+							"comment": {
+								"shortText": "a list of rules"
+							},
 							"type": {
 								"type": "array",
 								"elementType": {
@@ -76,7 +78,9 @@
 							"kind": 32768,
 							"kindString": "Parameter",
 							"flags": {},
-							"comment": {},
+							"comment": {
+								"shortText": "a prefix"
+							},
 							"type": {
 								"type": "intrinsic",
 								"name": "string"
@@ -116,7 +120,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "CrumbleAbstractedObject"
+											"name": "CrumbleAbstractedValue"
 										}
 									}
 								}
