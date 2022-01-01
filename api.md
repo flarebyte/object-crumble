@@ -4,15 +4,15 @@
 
 __Functions:__
 
-* [abstractObject](api.md#abstractObject)
-* [anyOfString](api.md#anyOfString)
-* [mutateObject](api.md#mutateObject)
-* [someUrl](api.md#someUrl)
+* [abstractObject](API.md#abstractObject)
+* [anyOfString](API.md#anyOfString)
+* [mutateObject](API.md#mutateObject)
+* [someUrl](API.md#someUrl)
 
 
 __Variables:__
 
-* [mutatorRules](api.md#mutatorRules)
+* [mutatorRules](API.md#mutatorRules)
 
 ## abstractObject
 

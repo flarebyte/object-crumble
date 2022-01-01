@@ -20,6 +20,7 @@
 
 * [Code Maintenance](MAINTENANCE.md)
 * [Code Of Conduct](CODE_OF_CONDUCT.md)
+* [Api for object-crumble](API.md)
 * [Contributing](CONTRIBUTING.md)
 * [Contributors](https://github.com/flarebyte/object-crumble/graphs/contributors)
 * [Dependencies](https://github.com/flarebyte/object-crumble/network/dependencies)

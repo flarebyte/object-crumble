@@ -1,6 +1,6 @@
 # Technical Design
 
-> 
+> Overall guideline for the source code development
 
 ## Code structure
 
