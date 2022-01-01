@@ -2,9 +2,14 @@
   "name": "object-crumble",
   "description": "Creative ways to cook your object",
   "keywords": [
-    "object"
+    "object",
+    "property-based testing",
+    "end-to-end testing",
+    "unit testing",
+    "testing",
+    "genetic programming"
   ],
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author": {
     "name": "Olivier Huin",
     "url": "https://github.com/olih"
