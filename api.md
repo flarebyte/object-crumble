@@ -1,14 +1,22 @@
 # API of object-crumble
 
-> API of object-crumble
+> List of functions and variables for `object-crumble`
+
+__Functions:__
+
+* [abstractObject](api.md#abstractObject)
+* [anyOfString](api.md#anyOfString)
+* [mutateObject](api.md#mutateObject)
+* [someUrl](api.md#someUrl)
 
 
+__Variables:__
+
+* [mutatorRules](api.md#mutatorRules)
 
 ## abstractObject
 
-See [obj-abstractor.ts - L58](src/obj-abstractor.ts)
-
-Convert any object to an abstract representation of the object structure
+⎔ Convert any object to an abstract representation of the object structure
 ```
 abstractObject({name: "Jane"})
 ```
@@ -24,11 +32,11 @@ abstractObject({name: "Jane"})
 an array of `CrumbleAbstractedValue` representing each `path` `kind` pair.
 
 
+See [obj-abstractor.ts - L58](https://github.com/flarebyte/object-crumble/blob/main/src/obj-abstractor.ts#L58)
+
 ## anyOfString
 
-See [string-abstractor.ts - L19](src/string-abstractor.ts)
-
-Detect a a string from a given list of string
+⎔ Detect a a string from a given list of string
 
 ### Parameters
 
@@ -41,11 +49,11 @@ Detect a a string from a given list of string
 the `name` keyword or false
 
 
+See [string-abstractor.ts - L19](https://github.com/flarebyte/object-crumble/blob/main/src/string-abstractor.ts#L19)
+
 ## mutateObject
 
-See [obj-mutator.ts - L104](src/obj-mutator.ts)
-
-Mutates an object applying a list of mutation.
+⎔ Mutates an object applying a list of mutation.
 We are using currying to provide the list of mutations rules.
 Only a single mutation is applied to facilitate the studying of the impact.
 
@@ -58,11 +66,11 @@ Only a single mutation is applied to facilitate the studying of the impact.
 a `CrumbleObject` representing most javascript objects
 
 
+See [obj-mutator.ts - L104](https://github.com/flarebyte/object-crumble/blob/main/src/obj-mutator.ts#L104)
+
 ## someUrl
 
-See [string-abstractor.ts - L9](src/string-abstractor.ts)
-
-Detect an url
+⎔ Detect an url
 
 ### Parameters
 
@@ -71,3 +79,14 @@ Detect an url
 ### Returns
 
 the `url` keyword or false
+
+
+See [string-abstractor.ts - L9](https://github.com/flarebyte/object-crumble/blob/main/src/string-abstractor.ts#L9)
+
+## mutatorRules
+
+Array of `CrumbleFieldMutation`
+
+Basic mutator rules that can be used out of the box
+
+See [obj-mutator.ts - L38](https://github.com/flarebyte/object-crumble/blob/main/src/obj-mutator.ts#L38)
