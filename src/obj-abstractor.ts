@@ -1,5 +1,5 @@
 import {
-  CrumbleAbstractedObject,
+  CrumbleAbstractedValue,
   StringAbstractionRule,
   CrumbleValue,
   CrumbleObject,
@@ -13,7 +13,7 @@ import {
 
 const applyRulesToPrimitiveEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>
-  (keyValue: [string, CrumbleValue]): CrumbleAbstractedObject => {
+  (keyValue: [string, CrumbleValue]): CrumbleAbstractedValue => {
     const [childPath, value] = keyValue;
     const path = `${prefix}${childPath}`;
     const defaultValue = { path, kind: typeof value };
@@ -26,7 +26,7 @@ const applyRulesToPrimitiveEntry =
 
 const applyRulesToArrayEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>
-  ([childPath, values]: [string, CrumbleValue]): CrumbleAbstractedObject => {
+  ([childPath, values]: [string, CrumbleValue]): CrumbleAbstractedValue => {
     if (!isCrumbleArray(values)) {
       throw new Error(`values should be an array not a ${typeof values}`);
     }
@@ -48,13 +48,16 @@ const applyRulesToArrayEntry =
   };
 /**
  * Convert any object to an abstract representation of the object structure
- * @param rules
- * @param prefix
- * @returns
+ * ```
+ * abstractObject({name: "Jane"})
+ * ```
+ * @param rules a list of rules used to infer the kind of value of each property in the object
+ * @param prefix  path of the object in the enclosing object, or empty if none
+ * @returns an array of `CrumbleAbstractedValue` representing each `path` `kind` pair.
  */
 export const abstractObject =
   (rules: StringAbstractionRule[], prefix = '') =>
-  (value: CrumbleObject): CrumbleAbstractedObject[] => {
+  (value: CrumbleObject): CrumbleAbstractedValue[] => {
     const results = Object.entries(value)
       .filter((kv) => isPrimitive(kv[1]))
       .map(applyRulesToPrimitiveEntry(prefix, rules));

@@ -32,6 +32,9 @@ const booleanToMutateValueRule =
     return boolMutate(value);
   };
 
+/**
+ * Basic mutator rules that can be used out of the box
+ */
 export const mutatorRules: CrumbleFieldMutation[] = [
   {
     name: 'string => empty',
@@ -91,6 +94,13 @@ export const mutatorRules: CrumbleFieldMutation[] = [
   },
 ];
 
+/**
+ * Mutates an object applying a list of mutation.
+ * We are using currying to provide the list of mutations rules.
+ * Only a single mutation is applied to facilitate the studying of the impact.
+ * @param rules a list of rules used to infer the kind of value of each property in the object
+ * @returns a `CrumbleObject` representing most javascript objects
+ */
 export const mutateObject =
   (rules: CrumbleFieldMutation[]) =>
   (mutation: OakObjApplicableMutation) =>

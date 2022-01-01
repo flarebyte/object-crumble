@@ -1,8 +1,15 @@
 {
   "name": "object-crumble",
   "description": "Creative ways to cook your object",
-  "keywords": ["object"],
-  "version": "0.1.0",
+  "keywords": [
+    "object",
+    "property-based testing",
+    "end-to-end testing",
+    "unit testing",
+    "testing",
+    "genetic programming"
+  ],
+  "version": "0.3.0",
   "author": {
     "name": "Olivier Huin",
     "url": "https://github.com/olih"
@@ -42,11 +49,13 @@
     "test:cov": "baldrick test cov",
     "test:ci": "baldrick test ci",
     "reset": "rm -rf dist; rm -rf report",
-    "build": "yarn reset;tsc --outDir dist",
+    "prebuild": "yarn reset",
+    "build": "tsc --outDir dist",
+    "doc": "npx typedoc --json report/doc.json --pretty src/index.ts && npx baldrick-doc-ts typedoc --json-source report/doc.json",
     "ready": "yarn lint && yarn test:cov && yarn outdated",
-    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT",
-    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT",
-    "doc": "npx typedoc --json doc.json --pretty src/index.ts"
+    "github": "gh repo edit --delete-branch-on-merge --enable-squash-merge",
+    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble",
+    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble"
   },
   "dependencies": {},
   "devDependencies": {

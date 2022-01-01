@@ -1,5 +1,6 @@
 /**
  * A primitive value for a field (string, number, ...)
+ * This goes a bit beyond JSON by also supporting symbol, bigint and function.
  */
 export type CrumblePrimitive =
   | null
@@ -12,23 +13,33 @@ export type CrumblePrimitive =
   | Function; // eslint-disable-line @typescript-eslint/ban-types
 
 /**
- * An javascript object
+ * An javascript object made of key value pair
  */
 export type CrumbleObject = { [Key in string]?: CrumbleValue };
 
 type CrumbleArray = CrumbleValue[];
 
 /**
- * Any of value supported by a field
+ * Any of the values supported that can associated with a key
  */
 export type CrumbleValue = CrumblePrimitive | CrumbleObject | CrumbleArray;
-export interface CrumbleAbstractedObject {
+
+/**
+ * Represents the `kind` of a value at a given path
+ */
+export interface CrumbleAbstractedValue {
   path: string;
   kind: string;
 }
 
+/**
+ * A transformation applied to a value
+ */
 export type MutateValueRule = (value: CrumbleValue) => CrumbleValue;
 
+/**
+ * A transformation applied to a string
+ */
 export type MutateStringRule = (value: string) => string;
 
 /**
@@ -40,8 +51,14 @@ export interface CrumbleFieldMutation {
   rule: MutateValueRule;
 }
 
+/**
+ * Rule that scans a string and infers a custom type
+ */
 export type StringAbstractionRule = (value: string) => string | false;
 
+/**
+ * A mutation that can be applied to a path
+ */
 export interface OakObjApplicableMutation {
   path: string;
   kind: string;
