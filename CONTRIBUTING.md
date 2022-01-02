@@ -1,4 +1,3 @@
-
 # Contributing
 
 Welcome ! and many thanks for taking the time to contribute !
@@ -24,33 +23,25 @@ A list of [most used commands](MAINTENANCE.md) is available.
 Please keep an eye on test coverage, bundle size and documentation.
 When you are ready for a pull request:
 
-```
-yarn ready
-```
+    yarn ready
 
 And please check that building is still working:
-```
-yarn build
-```
 
-You can also simulate [Github actions](https://docs.github.com/en/actions) locally with [act](https://github.com/nektos/act). 
+    yarn build
+
+You can also simulate [Github actions](https://docs.github.com/en/actions) locally with [act](https://github.com/nektos/act).
 You will need to setup `.actrc` with the node.js docker image `-P ubuntu-latest=node:14-buster`
 
 To run the pipeline:
 
-```
-act
-```
+    act
 
 ## Pull Request Process
 
-1. Make sure that an issue describing the intended code change exists and that this issue has been accepted.
-
+1.  Make sure that an issue describing the intended code change exists and that this issue has been accepted.
 
 ## Publishing the library
 
 This would be done by the main maintainers of the project. Locally for now as updates are pretty infrequent.
 
-```
-yarn version
-```
+    yarn version
