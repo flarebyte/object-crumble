@@ -4,14 +4,14 @@
 
 **Functions:**
 
-*   [abstractObject](API.md#abstractObject)
-*   [anyOfString](API.md#anyOfString)
-*   [mutateObject](API.md#mutateObject)
-*   [someUrl](API.md#someUrl)
+- [abstractObject](API.md#abstractObject)
+- [anyOfString](API.md#anyOfString)
+- [mutateObject](API.md#mutateObject)
+- [someUrl](API.md#someUrl)
 
 **Variables:**
 
-*   [mutatorRules](API.md#mutatorRules)
+- [mutatorRules](API.md#mutatorRules)
 
 ## abstractObject
 
@@ -21,9 +21,9 @@
 
 ### Parameters
 
-*   rules: Array of `StringAbstractionRule`: a list of rules used to infer the kind of value of each property in the object
+- rules: Array of `StringAbstractionRule`: a list of rules used to infer the kind of value of each property in the object
 
-*   prefix: `string`: path of the object in the enclosing object, or empty if none
+- prefix: `string`: path of the object in the enclosing object, or empty if none
 
 ### Returns
 
@@ -37,9 +37,9 @@ See [obj-abstractor.ts - L58](https://github.com/flarebyte/object-crumble/blob/m
 
 ### Parameters
 
-*   name: `string`: the keyword to return if the detection happens
+- name: `string`: the keyword to return if the detection happens
 
-*   options: Array of `string`: a list of string that would satisfy the detection
+- options: Array of `string`: a list of string that would satisfy the detection
 
 ### Returns
 
@@ -55,7 +55,7 @@ Only a single mutation is applied to facilitate the studying of the impact.
 
 ### Parameters
 
-*   rules: Array of `CrumbleFieldMutation`: a list of rules used to infer the kind of value of each property in the object
+- rules: Array of `CrumbleFieldMutation`: a list of rules used to infer the kind of value of each property in the object
 
 ### Returns
 
@@ -69,7 +69,7 @@ See [obj-mutator.ts - L104](https://github.com/flarebyte/object-crumble/blob/mai
 
 ### Parameters
 
-*   value: `string`: the text to check
+- value: `string`: the text to check
 
 ### Returns
 

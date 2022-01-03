@@ -22,9 +22,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn lint`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Fix static code analysis
 
@@ -36,9 +36,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn lint:fix`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Static code analysis for continuous integration
 
@@ -50,9 +50,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn lint:ci`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Unit testing
 
@@ -64,9 +64,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn test`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Fix unit testing snapshots
 
@@ -78,9 +78,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn test:fix`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Unit testing code coverage
 
@@ -92,9 +92,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn test:cov`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Unit testing code and coverage for continuous integration
 
@@ -106,9 +106,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn test:ci`
 
-**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) :  Zero-config CLI for TypeScript package development
+**From package:** [baldrick](https://github.com/flarebyte/baldrick-dev-ts) of [npm](https://www.npmjs.com/) : Zero-config CLI for TypeScript package development
 
-***
+---
 
 ### Reset distribution and report folders
 
@@ -120,9 +120,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn reset`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Clear previous build
 
@@ -134,9 +134,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn prebuild`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Build the library
 
@@ -148,9 +148,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn build`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Generate the documentation
 
@@ -162,9 +162,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn doc`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Ready for publishing
 
@@ -176,9 +176,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn ready`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Versioning
 
@@ -190,9 +190,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn version`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Run GitHub Actions locally
 
@@ -204,9 +204,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `act`
 
-**From package:** [act](https://github.com/nektos/act) of [brew](https://docs.brew.sh/) :  Run GitHub Actions locally
+**From package:** [act](https://github.com/nektos/act) of [brew](https://docs.brew.sh/) : Run GitHub Actions locally
 
-***
+---
 
 ### Update github repository
 
@@ -218,9 +218,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn github`
 
-**From package:** [gh](https://cli.github.com/) of [brew](https://docs.brew.sh/) :  GitHub CLI brings GitHub to your terminal
+**From package:** [gh](https://cli.github.com/) of [brew](https://docs.brew.sh/) : GitHub CLI brings GitHub to your terminal
 
-***
+---
 
 ### Install the local project globally
 
@@ -232,9 +232,9 @@ The typical developer workflow goes as follow:
 
 **Run:** \`\`\`yarn global add \`pwd\`\`\`\`
 
-**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) :  Dependency management
+**From package:** [yarn](https://classic.yarnpkg.com/en/) of [npm](https://www.npmjs.com/) : Dependency management
 
-***
+---
 
 ### Normalize the code structure using latest
 
@@ -246,9 +246,9 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn norm`
 
-**From package:** [baldrick-ts](https://github.com/flarebyte/baldrick-ts) of [npm](https://www.npmjs.com/) :  Typescript scaffolding assistant
+**From package:** [baldrick-ts](https://github.com/flarebyte/baldrick-ts) of [npm](https://www.npmjs.com/) : Typescript scaffolding assistant
 
-***
+---
 
 ### Normalize the code structure
 
@@ -260,6 +260,6 @@ The typical developer workflow goes as follow:
 
 **Run:** `yarn norm:g`
 
-**From package:** [baldrick-ts](https://github.com/flarebyte/baldrick-ts) of [npm](https://www.npmjs.com/) :  Typescript scaffolding assistant
+**From package:** [baldrick-ts](https://github.com/flarebyte/baldrick-ts) of [npm](https://www.npmjs.com/) : Typescript scaffolding assistant
 
-***
+---
