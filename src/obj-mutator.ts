@@ -19,7 +19,7 @@ const stringToMutateValueRule =
   (stringMutate: MutateStringRule) =>
   (value: CrumbleValue): CrumbleValue => {
     if (typeof value !== 'string') {
-      throw new Error('The value should have been a string');
+      throw new TypeError('The value should have been a string');
     }
     return stringMutate(value);
   };
@@ -27,7 +27,7 @@ const booleanToMutateValueRule =
   (boolMutate: (b: boolean) => boolean) =>
   (value: CrumbleValue): CrumbleValue => {
     if (typeof value !== 'boolean') {
-      throw new Error('The value should have been a boolean');
+      throw new TypeError('The value should have been a boolean');
     }
     return boolMutate(value);
   };
@@ -46,7 +46,7 @@ export const mutatorRules: CrumbleFieldMutation[] = [
     fieldKind: 'string',
     rule: (value: CrumbleValue) =>
       stringToMutateValueRule((v) =>
-        v.length === 0 ? 'z'.repeat(10000) : v.repeat(5000)
+        v.length === 0 ? 'z'.repeat(10_000) : v.repeat(5000)
       )(value),
   },
   {
@@ -68,7 +68,7 @@ export const mutatorRules: CrumbleFieldMutation[] = [
   {
     name: 'number => big',
     fieldKind: 'number',
-    rule: () => 1007199254740991,
+    rule: () => 1_007_199_254_740_991,
   },
   {
     name: 'number => negative',

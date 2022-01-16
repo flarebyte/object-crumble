@@ -20,8 +20,8 @@ const applyRulesToPrimitiveEntry =
     if (!isString(value)) {
       return defaultValue;
     }
-    const triggered = rules.map((rule) => rule(value)).filter(Boolean);
-    return triggered[0] ? { path, kind: triggered[0] } : defaultValue;
+    const triggered = rules.map((rule) => rule(value)).find(Boolean);
+    return triggered ? { path, kind: triggered } : defaultValue;
   };
 
 const applyRulesToArrayEntry =

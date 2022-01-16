@@ -1,6 +1,4 @@
-import {
-  abstractObject,
-} from '../src/obj-abstractor';
+import { abstractObject } from '../src/obj-abstractor';
 import { anyOfString, someUrl } from '../src/string-abstractor';
 
 describe('Object Abstractor', () => {
