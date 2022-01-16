@@ -20,7 +20,7 @@ export const findFieldValue = (
   if (rest.length === 0 || isPrimitive(second)) {
     return second;
   } else if (isCrumbleArray(second)) {
-    const index = parseInt(rest.join('.')[0] || '0');
+    const index = Number.parseInt(rest.join('.')[0] || '0');
     return second[index];
   } else {
     return findFieldValue(rest.join('.'), second);
@@ -98,7 +98,7 @@ const mergeTwoPathStack = (a: TmpStackPath, b: TmpStackPath): TmpStackPath => ({
   obj: isCrumbleObject(b.obj) ? copyObjField(a.key, a.obj, b.obj) : b.obj,
 });
 const mergeAlongPath = (stack: TmpStackPath[]): TmpStackPath =>
-  stack.reduce(mergeTwoPathStack);
+  stack.reduce(mergeTwoPathStack); // eslint-disable-line unicorn/no-array-reduce
 
 /**
  * Sets the value at a given path in an object

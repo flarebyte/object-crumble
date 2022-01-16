@@ -9,7 +9,7 @@
     "testing",
     "genetic programming"
   ],
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "Olivier Huin",
     "url": "https://github.com/olih"
@@ -41,25 +41,25 @@
     "node": ">=14"
   },
   "scripts": {
-    "lint": "baldrick lint check",
-    "lint:fix": "baldrick lint fix",
-    "lint:ci": "baldrick lint ci",
-    "test": "baldrick test check",
-    "test:fix": "baldrick test fix",
-    "test:cov": "baldrick test cov",
-    "test:ci": "baldrick test ci",
-    "reset": "rm -rf dist; rm -rf report",
-    "prebuild": "yarn reset",
     "build": "tsc --outDir dist",
     "doc": "npx typedoc --json report/doc.json --pretty src/index.ts && npx baldrick-doc-ts typedoc --json-source report/doc.json",
-    "ready": "yarn lint && yarn test:cov && yarn outdated",
     "github": "gh repo edit --delete-branch-on-merge --enable-squash-merge",
-    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble",
-    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble",
-    "md": "yarn remark .",
-    "md:fix": "yarn remark . --output",
-    "md:help": "yarn remark --help",
-    "md:f2": "npx prettier *.md --write"
+    "lint:ci": "baldrick lint ci",
+    "lint": "baldrick lint check",
+    "lint:fix": "baldrick lint fix",
+    "md": "baldrick markdown check && baldrick markdown check -s .github",
+    "md:fix": "baldrick markdown fix && baldrick markdown fix -s .github",
+    "prebuild": "yarn reset",
+    "ready": "yarn lint && yarn test:cov && yarn md && yarn outdated && yarn audit",
+    "reset": "rm -rf dist; rm -rf report",
+    "test:ci": "baldrick test ci",
+    "test": "baldrick test check",
+    "test:cov": "baldrick test cov",
+    "test:fix": "baldrick test fix",
+    "release:check": "baldrick release check",
+    "release:ci": "baldrick release ci",
+    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble && yarn md:fix",
+    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble && yarn md:fix"
   },
   "dependencies": {},
   "devDependencies": {
