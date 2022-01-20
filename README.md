@@ -30,7 +30,7 @@ programmatically existing data:
 
 Convert any object to an abstract representation of the object structure
 
-abstractObject({name: "Jane", homepage: "http://mywebsite.com" })
+abstractObject({name: "Jane", homepage: "<http://mywebsite.com>" })
 
 will return:
 
@@ -78,6 +78,7 @@ A more exhaustive documentation of the api is [available](API.md)
 -   [Code Of Conduct](CODE_OF_CONDUCT.md)
 -   [Api for object-crumble](API.md)
 -   [Contributing](CONTRIBUTING.md)
+-   [Glossary](GLOSSARY.md)
 -   [Contributors](https://github.com/flarebyte/object-crumble/graphs/contributors)
 -   [Dependencies](https://github.com/flarebyte/object-crumble/network/dependencies)
 
