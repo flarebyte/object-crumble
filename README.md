@@ -3,6 +3,8 @@
 ![npm](https://img.shields.io/npm/v/object-crumble) ![Build
 status](https://github.com/flarebyte/object-crumble/actions/workflows/main.yml/badge.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/object-crumble)
+![Codacy
+Badge](https://app.codacy.com/project/badge/Grade/60b7f9751c214b0fa16ef3a6acf6c2c8)
 
 ![npm type definitions](https://img.shields.io/npm/types/object-crumble)
 ![node-current](https://img.shields.io/node/v/object-crumble)
@@ -34,40 +36,41 @@ abstractObject({name: "Jane", homepage: "<http://mywebsite.com>" })
 
 will return:
 
-\[
-{
-"path": "name",
-"kind": "string",
-},
-{
-"path": "homepage",
-"kind": "url",
-}
-]
+```typescript
+[
+  {
+    path: "name",
+    kind: "string",
+  },
+  {
+    path: "homepage",
+    kind: "url",
+  },
+];
+```
 
 Mutates an object applying a mutation.
 
+```typescript
 const mutation = {
-path: 'name',
-kind: 'string',
-mutationName: 'string => empty',
+  path: "name",
+  kind: "string",
+  mutationName: "string => empty",
 };
 
-mutateObject(mutatorRules)(
-mutation
-)({
-name: 'Picasso',
-firstName: 'Pablo',
+mutateObject(mutatorRules)(mutation)({
+  name: "Picasso",
+  firstName: "Pablo",
 });
+```
 
 will return empty field for `name`:
 
-```
+```typescript
 {
 name: '',
 firstName: 'Pablo'
 }
-
 ```
 
 A more exhaustive documentation of the api is [available](API.md)
@@ -87,6 +90,6 @@ A more exhaustive documentation of the api is [available](API.md)
 This package is [ESM
 only](https://blog.sindresorhus.com/get-ready-for-esm-aa53530b3f77).
 
-```
+```bash
 yarn add object-crumble
 ```

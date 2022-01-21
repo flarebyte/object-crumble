@@ -6,20 +6,23 @@ import {
   transformFieldValue,
 } from '../src/obj-path-utils';
 
+const transfString: MutateValueRule = (value: CrumbleValue) =>
+  typeof value === 'string' ? value + '_' : value;
+
+const asset = {
+  name: 'value-of-name',
+  child: {
+    name: 'child name',
+    sizes: [12, 15],
+    siblings: [{ name: 'paul' }, { name: 'joe' }],
+    game: {
+      description: 'fencing',
+    },
+  },
+};
+
 describe('Object Path Utils', () => {
   describe('findFieldValue', () => {
-    const asset = {
-      name: 'value-of-name',
-      child: {
-        name: 'child name',
-        sizes: [12, 15],
-        siblings: [{ name: 'paul' }, { name: 'joe' }],
-        game: {
-          description: 'fencing',
-        },
-      },
-    };
-
     it('read field at the root', () => {
       const actual = findFieldValue('name', asset);
       expect(actual).toEqual(asset.name);
@@ -64,18 +67,6 @@ describe('Object Path Utils', () => {
     });
   });
   describe('setFieldValue', () => {
-    const asset = {
-      name: 'value-of-name',
-      child: {
-        name: 'child name',
-        sizes: [12, 15],
-        siblings: [{ name: 'paul' }, { name: 'joe' }],
-        game: {
-          description: 'fencing',
-        },
-      },
-    };
-
     it('set field at the root', () => {
       const actual = setFieldValue(asset, 'name', 'new-name');
       expect(actual).toHaveProperty('name', 'new-name');
@@ -97,21 +88,6 @@ describe('Object Path Utils', () => {
     });
   });
   describe('transformFieldValue', () => {
-    const asset = {
-      name: 'value-of-name',
-      child: {
-        name: 'child name',
-        sizes: [12, 15],
-        siblings: [{ name: 'paul' }, { name: 'joe' }],
-        game: {
-          description: 'fencing',
-        },
-      },
-    };
-
-    const transfString: MutateValueRule = (value: CrumbleValue) =>
-      typeof value === 'string' ? value + '_' : value;
-
     it('transform field at the root', () => {
       const actual = transformFieldValue('name', transfString, asset);
       expect(actual).toHaveProperty('name', asset.name + '_');

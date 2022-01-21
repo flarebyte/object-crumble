@@ -16,7 +16,7 @@ describe('Object Abstractor', () => {
         text: 'some text',
         digital: 14,
         onOff: true,
-        biggerInt: BigInt(9007199254740991),
+        biggerInt: BigInt(9_007_199_254_740_991),
         symbolic: Symbol('symbolic'),
         myFunction: (x: number) => x + 10,
       });

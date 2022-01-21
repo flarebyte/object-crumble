@@ -8,15 +8,13 @@ describe('Object Mutator', () => {
         kind: 'string',
         mutationName: 'string => large',
       };
-      const actual: { [index: string]: any } = mutateObject(mutatorRules)(
-        mutation
-      )({
+      const actual = mutateObject(mutatorRules)(mutation)({
         name: 'Picasso',
         firstName: 'Pablo',
       });
       expect(actual).toHaveProperty('name');
       expect(actual).toHaveProperty('firstName');
-      expect(actual['name']).toHaveLength(35000);
+      expect(actual['name']).toHaveLength(35_000);
     });
 
     it('mutate an object with two rules with one level', () => {
@@ -32,7 +30,7 @@ describe('Object Mutator', () => {
       };
       const mutate1 = mutateObject(mutatorRules)(mutation);
       const mutate2 = mutateObject(mutatorRules)(mutation2);
-      const actual: { [index: string]: any } = mutate2(
+      const actual = mutate2(
         mutate1({
           painter: {
             name: 'Picasso',
@@ -41,7 +39,9 @@ describe('Object Mutator', () => {
         })
       );
       expect(actual).toHaveProperty('painter.name');
-      expect(actual['painter']['name']).toHaveLength(35000);
+      const painter = actual && actual['painter'];
+      const name = painter && Object.values(painter)[0];
+      expect(name).toHaveLength(35_000);
       expect(actual).toHaveProperty('painter.firstName', '');
     });
   });
