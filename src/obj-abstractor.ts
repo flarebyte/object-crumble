@@ -48,7 +48,7 @@ const applyRulesToArrayEntry =
   };
 /**
  * Convert any object to an abstract representation of the object structure
- * ```
+ * ```typescript
  * abstractObject({name: "Jane"})
  * ```
  * @param rules a list of rules used to infer the kind of value of each property in the object

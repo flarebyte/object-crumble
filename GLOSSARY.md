@@ -7,6 +7,7 @@ Some additional references:
     jargon](https://github.com/hemanth/functional-programming-jargon)
 
 -   [FP glossary](https://degoes.net/articles/fp-glossary)
+    This glossary could also be used as a controlled vocabulary for documentation
 
 ## Higher-Order Function
 

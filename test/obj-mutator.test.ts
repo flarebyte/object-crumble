@@ -16,7 +16,7 @@ describe('Object Mutator', () => {
       });
       expect(actual).toHaveProperty('name');
       expect(actual).toHaveProperty('firstName');
-      expect(actual['name']).toHaveLength(35000);
+      expect(actual['name']).toHaveLength(35_000);
     });
 
     it('mutate an object with two rules with one level', () => {
@@ -41,7 +41,7 @@ describe('Object Mutator', () => {
         })
       );
       expect(actual).toHaveProperty('painter.name');
-      expect(actual['painter']['name']).toHaveLength(35000);
+      expect(actual['painter']['name']).toHaveLength(35_000);
       expect(actual).toHaveProperty('painter.firstName', '');
     });
   });

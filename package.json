@@ -9,7 +9,7 @@
     "testing",
     "genetic programming"
   ],
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": {
     "name": "Olivier Huin",
     "url": "https://github.com/olih"
@@ -32,6 +32,7 @@
       "default": "./package.json"
     }
   },
+  "main": "./dist/src/index.mjs",
   "files": [
     "dist/src",
     "src"
@@ -45,8 +46,8 @@
     "doc": "npx typedoc --json report/doc.json --pretty src/index.ts && npx baldrick-doc-ts typedoc --json-source report/doc.json",
     "github": "gh repo edit --delete-branch-on-merge --enable-squash-merge",
     "lint:ci": "baldrick lint ci",
-    "lint": "baldrick lint check",
-    "lint:fix": "baldrick lint fix",
+    "lint": "baldrick lint check -s src test",
+    "lint:fix": "baldrick lint fix -s src test",
     "md": "baldrick markdown check && baldrick markdown check -s .github/",
     "md:fix": "baldrick markdown fix && baldrick markdown fix -s .github/",
     "prebuild": "yarn reset",
@@ -59,8 +60,8 @@
     "release:check": "baldrick release check",
     "release:ci": "baldrick release ci",
     "h": "cat commands.txt",
-    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble && yarn md:fix",
-    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -b object-crumble && yarn md:fix"
+    "norm": "npx baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -cod 60b7f9751c214b0fa16ef3a6acf6c2c8 && yarn md:fix",
+    "norm:g": "baldrick-ts generate -f lib -ga 'flarebyte' -ch 'Flarebyte.com' -cy 2021 -l MIT -cod 60b7f9751c214b0fa16ef3a6acf6c2c8 && yarn md:fix"
   },
   "dependencies": {},
   "devDependencies": {
