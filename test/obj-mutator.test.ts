@@ -1,4 +1,4 @@
-import { mutateObject, mutatorRules } from '../src/obj-mutator';
+import { mutateObject, mutatorRules } from '../src/obj-mutator.js';
 
 describe('Object Mutator', () => {
   describe('mutateObject', () => {

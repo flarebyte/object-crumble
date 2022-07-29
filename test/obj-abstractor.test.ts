@@ -1,5 +1,5 @@
-import { abstractObject } from '../src/obj-abstractor';
-import { anyOfString, someUrl } from '../src/string-abstractor';
+import { abstractObject } from '../src/obj-abstractor.js';
+import { anyOfString, someUrl } from '../src/string-abstractor.js';
 
 describe('Object Abstractor', () => {
   describe('abstractObject', () => {

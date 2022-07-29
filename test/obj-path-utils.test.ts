@@ -1,10 +1,10 @@
-import { CrumbleValue, MutateValueRule } from '../src/model';
+import { CrumbleValue, MutateValueRule } from '../src/model.js';
 import {
   findFieldValue,
   pathsOfSelfOrAncestors,
   setFieldValue,
   transformFieldValue,
-} from '../src/obj-path-utils';
+} from '../src/obj-path-utils.js';
 
 const transfString: MutateValueRule = (value: CrumbleValue) =>
   typeof value === 'string' ? value + '_' : value;

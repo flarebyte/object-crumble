@@ -1,4 +1,4 @@
-import { isCrumbleArray } from '../src/type-checker';
+import { isCrumbleArray } from '../src/type-checker.js';
 
 describe('Type Checker', () => {
   describe('isCrumbleArray', () => {
