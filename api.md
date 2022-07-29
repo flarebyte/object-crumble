@@ -17,8 +17,8 @@
 
 ⎔ Convert any object to an abstract representation of the object structure
 
-```
-abstractObject({name: "Jane"})
+```typescript
+abstractObject({ name: "Jane" });
 ```
 
 ### Parameters
