@@ -9,7 +9,7 @@
     "testing",
     "genetic programming"
   ],
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": {
     "name": "Olivier Huin",
     "url": "https://github.com/olih"
@@ -22,6 +22,7 @@
   },
   "bugs": "https://github.com/flarebyte/object-crumble/issues",
   "type": "module",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/src/index.mjs",
