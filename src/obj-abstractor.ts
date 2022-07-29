@@ -3,13 +3,13 @@ import {
   StringAbstractionRule,
   CrumbleValue,
   CrumbleObject,
-} from './model';
+} from './model.js';
 import {
   isCrumbleArray,
   isCrumbleObject,
   isPrimitive,
   isString,
-} from './type-checker';
+} from './type-checker.js';
 
 const applyRulesToPrimitiveEntry =
   (prefix: string, rules: StringAbstractionRule[]) =>

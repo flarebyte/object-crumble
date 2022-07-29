@@ -1,5 +1,9 @@
-import { CrumbleValue, CrumbleObject, MutateValueRule } from './model';
-import { isCrumbleArray, isCrumbleObject, isPrimitive } from './type-checker';
+import { CrumbleValue, CrumbleObject, MutateValueRule } from './model.js';
+import {
+  isCrumbleArray,
+  isCrumbleObject,
+  isPrimitive,
+} from './type-checker.js';
 
 /**
  * Find a value in an object given the path

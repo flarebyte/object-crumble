@@ -1,11 +1,11 @@
-import { transformFieldValue } from './obj-path-utils';
+import { transformFieldValue } from './obj-path-utils.js';
 import {
   OakObjApplicableMutation,
   CrumbleFieldMutation,
   CrumbleValue,
   CrumbleObject,
   MutateStringRule,
-} from './model';
+} from './model.js';
 
 const unusualChar = '🤢';
 

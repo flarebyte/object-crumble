@@ -1,4 +1,4 @@
-import { CrumbleObject, CrumblePrimitive, CrumbleValue } from './model';
+import { CrumbleObject, CrumblePrimitive, CrumbleValue } from './model.js';
 
 export const isPrimitive = (value: CrumbleValue): value is CrumblePrimitive =>
   value === null ||

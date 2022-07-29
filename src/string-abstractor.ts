@@ -1,4 +1,4 @@
-import { StringAbstractionRule } from './model';
+import { StringAbstractionRule } from './model.js';
 
 /**
  * Detect an url
