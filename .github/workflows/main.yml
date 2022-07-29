@@ -28,5 +28,3 @@ jobs:
         run: yarn test:ci
       - name: Build
         run: yarn build
-      - name: Version
-        run: yarn release:check
