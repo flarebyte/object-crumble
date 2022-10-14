@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+       "script/schema/baldrick-broth.schema.json": "baldrick-broth.yaml"
+    }
+  }
