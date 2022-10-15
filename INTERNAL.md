@@ -9,13 +9,13 @@ This document has been generated automatically by
 
 ```mermaid
 classDiagram
-class `index.ts`
 class `model.ts`
 class `obj-abstractor.ts`{
   - applyRulesToPrimitiveEntry()
   - applyRulesToArrayEntry()
   +abstractObject()
 }
+
 class `obj-mutator.ts`{
   - identityRule()
   - stringToMutateValueRule()
@@ -23,6 +23,7 @@ class `obj-mutator.ts`{
   +mutatorRules()
   +mutateObject()
 }
+
 class `obj-path-utils.ts`{
   +findFieldValue()
   - getParentPath()
@@ -48,7 +49,7 @@ class `type-checker.ts`{
   +isCrumbleArray()
   +isCrumbleObject()
 }
-class `./model`{
+class `./model.js`{
   +CrumbleValue()
   +CrumblePrimitive()
   +CrumbleObject()
@@ -59,21 +60,21 @@ class `./model`{
   +OakObjApplicableMutation()
   +CrumbleAbstractedValue()
 }
-class `./type-checker`{
+class `./type-checker.js`{
   +isPrimitive()
   +isCrumbleObject()
   +isCrumbleArray()
   +isString()
 }
-class `./obj-path-utils`{
+class `./obj-path-utils.js`{
   +transformFieldValue()
 }
-`obj-abstractor.ts`-->`./model`
-`obj-abstractor.ts`-->`./type-checker`
-`obj-mutator.ts`-->`./obj-path-utils`
-`obj-mutator.ts`-->`./model`
-`obj-path-utils.ts`-->`./model`
-`obj-path-utils.ts`-->`./type-checker`
-`string-abstractor.ts`-->`./model`
-`type-checker.ts`-->`./model`
+`obj-abstractor.ts`-->`./model.js`
+`obj-abstractor.ts`-->`./type-checker.js`
+`obj-mutator.ts`-->`./obj-path-utils.js`
+`obj-mutator.ts`-->`./model.js`
+`obj-path-utils.ts`-->`./model.js`
+`obj-path-utils.ts`-->`./type-checker.js`
+`string-abstractor.ts`-->`./model.js`
+`type-checker.ts`-->`./model.js`
 ```

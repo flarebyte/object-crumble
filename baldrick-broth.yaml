@@ -10,58 +10,154 @@ binaries:
       diagnosis: sh --version
 
 model:
-  githubAccount: github-account-fixme
-  projectName: project-name-fixme
+  github:
+    account: flarebyte
+    name: object-crumble
   copyright:
-    holder: copyright-holder-fixme
-    startYear: 2022
-  license: BSD3
-  project_yaml: script/data/project.yaml
-  project_schema: './script/schema/project.schema.json'
-  generate_sh: script/generate.sh
-  colors:
-    - green
-    - orange
-    - blue
-  animals:
-    - cat
-    - dog
+    holder: Flarebyte.com Ltd
+    startYear: 2021
+  license: MIT
 workflows:
   test:
-    title: Test your library
-    description: Test your library for defects
+    title: Test the library
+    description: Test the library for defects
     tasks:
-      generate:
-        title: Generate code
-        description: Generate code
-        motivation: Generate code
+      jest:
+        title: Run unit tests using Jest
+        description: Use the Jest framework to run unit test (deprecated)
         parameters:
-          color:
-            description: Color
-            flags: '-c, --color <type>'
+          fix:
+            description: Fix the snapshots
+            flags: '--fix'
         steps:
           - a: batch
-            name: calculate
-            title: Run calculate
-            before:
-              - a: get-property
-                name: githubAccount
-                title: Set variable githubAccount
-                value: model.githubAccount
+            name: Test
+            title: Run the jest unit tests
             commands:
-              - name: echo
-                title: simple echo
-                run: echo "{{githubAccount}} and {{color}}"
-              - name: echo2
-                title: simple echo2
-                run: echo "{{build.name}}"
-                onSuccess:
-                  - trim
-                onFailure:
-                  - exit
+              - name: test
+                title: Test all test files in test folder
+                run: npx baldrick-dev-ts test check
+  compile:
+    title: Compile source code
+    description: Compile typescript source code
+    tasks:
+      build:
+        title: Generate javascript
+        description: Generate javascript from the typescript source code
+        parameters:
+          fix:
+            description: The output directory
+            flags: '--outDir'
+        steps:
           - a: batch
-            name: list files
-            title: List files
+            name: compile
+            title: Compile the typescript code
             commands:
-              - name: list source files
-                run: yarn lint
+              - name: clean
+                title: Delete dist folder
+                run: rm -rf dist
+              - name: tsc
+                title: Compile with typescript
+                run: tsc --outDir dist
+      doc:
+        title: Generate documentation
+        description: Generate the documentation based on the source code
+        parameters:
+          fix:
+            description: The output directory
+            flags: '--outDir'
+        steps:
+          - a: batch
+            name: main
+            title: Generate the documentation
+            commands:
+              - name: report-folder
+                title: Ensure that we have a report folder
+                run: mdir -p report
+              - name: typedoc
+                title: Generate typedoc doc.json
+                run: npx typedoc --json report/doc.json --pretty src/index.ts
+              - name: api
+                title: Generate markdown files for the Api
+                run: npx baldrick-doc-ts typedoc --json-source report/doc.json
+              - name: ngram
+                title: Generate some markdown files with ngram
+                run: baldrick-doc-ts parse -f internal ngram
+              - name: fix
+                title: Fix all the markdown files
+                run: baldrick markdown fix
+              - name: github
+                run: baldrick markdown fix -s .github/
+  github:
+    title: Generate documentation
+    description: Generate the documentation based on the source code
+    tasks:
+      standard:
+        title: Standard
+        description: Standard
+        parameters:
+          fix:
+            description: aaa
+            flags: '--fix'
+        steps:
+          - a: batch
+            name: edit
+            commands:
+              - name: edit
+                run: gh repo edit --delete-branch-on-merge --enable-squash-merge
+  lint:
+    title: Static code analysis
+    description: Find problems in Typescript code
+    tasks:
+      check:
+        title: Static code analysis of Typescript code
+        description: Static code analysis of Typescript code
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            title: lint check
+            commands:
+              - name: check
+                title: Lint check sources
+                run: baldrick lint check -s src test
+      fix:
+        title: Static code analysis of Typescript code
+        description: Static code analysis of Typescript code
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: fix
+                run: baldrick lint fix -s src test
+  md:
+    title: Markdown documentation
+    description: Manage markdown documentation
+    tasks:
+      check:
+        title: Checks markdown documentation
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: check
+                title: Check markdown files
+                run: baldrick markdown check
+              - name: github
+                title: Check markdown files in github
+                run: baldrick markdown check -s .github/
+      fix:
+        title: Fixes markdown documentation
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: fix
+                title: Fix markdown files
+                run: baldrick markdown fix
+              - name: github
+                title: Fix markdown files in github
+                run: baldrick markdown fix -s .github/
