@@ -161,3 +161,31 @@ workflows:
               - name: github
                 title: Fix markdown files in github
                 run: baldrick markdown fix -s .github/
+  release:
+    title: Prepare for release
+    tasks:
+      ready:
+        title: Check that the library is ready to be published
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: lint
+                run: baldrick lint check -s src test
+              - name: markdown
+                title: Check markdown files
+                run: baldrick markdown check
+              - name: markdown-github
+                title: Check markdown files in github
+                run: baldrick markdown check -s .github/
+              - name: outdated
+                title: Check whether some libraries are outdated
+                run: yarn outdated
+              - name: outdated
+                title: Audit some libraries
+                run: yarn audit
+              - name: release-check
+                title: Checks that the version has been incremented
+                run: baldrick release check
+          
