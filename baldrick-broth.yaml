@@ -188,4 +188,34 @@ workflows:
               - name: release-check
                 title: Checks that the version has been incremented
                 run: baldrick release check
-          
+  scaffold:
+    title: Scaffolding for the project
+    tasks:
+      norm:
+        title: Normalize the project
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: mkdir
+                run: mkdir -p .vscode .github/workflows .github/ISSUE_TEMPLATE src test spec script script/data script/schema
+              - name: snippet
+                run: npx baldrick-whisker@latest object --no-ext .vscode/baldrick.code-snippets.json github:flarebyte:baldrick-reserve:data/ts/snippet.yaml
+              - name: bug-report
+                run: npx baldrick-whisker@latest object .github/ISSUE_TEMPLATE/bug_report.yaml github:flarebyte:baldrick-reserve:data/ts/bug-report.yaml
+              - name: feature-request
+                run: npx baldrick-whisker@latest object .github/ISSUE_TEMPLATE/feature_request.yaml github:flarebyte:baldrick-reserve:data/ts/feature-request.yaml
+              - name: workflow-main
+                run: npx baldrick-whisker@latest object .github/workflows/main.yml github:flarebyte:baldrick-reserve:data/ts/workflow-main.yml
+              - name: gitignore
+                run: npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/ts/gitignore.hbs .gitignore.sh
+              - name: editorconfig
+                run: npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/editorconfig.hbs .editorconfig.sh
+              - name: contributing
+                run: npx baldrick-whisker@latest render baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/ts/contributing.hbs CONTRIBUTING.md
+              - name: pull-request-template
+                run: npx baldrick-whisker@latest render baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/ts/pull-request-template.hbs .github/pull_request_template.md
+              - name: glossary
+                run: npx baldrick-whisker@latest render github:flarebyte:baldrick-reserve:data/glossary.yaml github:flarebyte:baldrick-reserve:template/glossary.hbs GLOSSARY.md
+
