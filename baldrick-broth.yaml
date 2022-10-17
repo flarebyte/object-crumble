@@ -1,4 +1,33 @@
 ---
+model:
+  project:
+    title: Creative ways to cook your objects
+    description: The main motivation is to boost the writing of unit tests by simplifying the process of creating new data content. 
+      This is achieved by mutating programmatically existing data
+    media: logo.png
+  readme:
+    highlights:
+      - Written in `Typescript`.
+      - Uses JSON-like object as an input.
+      - Can be used with any testing framework (Jest, Ava, baldrick-zest, etc...)
+      - A simpler and experimental alternative to property testing. **No need
+        for a schema**. You should still consider, property based testing framework
+        like[fast-check](https://dubzzz.github.io/fast-check.github.com/) that
+        can help find bugs in unexplored code paths.
+    usage:
+      media: usage.png
+      link: USAGE.md
+    links:
+      - "[Usage](USAGE.md)"
+    related:
+      - "[baldrick-zest-engine](https://github.com/flarebyte/baldrick-zest-engine) Run tests declaratively with a few cunning plans"
+  github:
+    account: flarebyte
+    name: object-crumble
+  copyright:
+    holder: Flarebyte.com Ltd
+    startYear: 2021
+  license: MIT
 binaries:
   sh:
     title: Title of sh
@@ -8,60 +37,79 @@ binaries:
     shell:
       run: sh
       diagnosis: sh --version
-
-model:
-  github:
-    account: flarebyte
-    name: object-crumble
-  copyright:
-    holder: Flarebyte.com Ltd
-    startYear: 2021
-  license: MIT
 workflows:
   test:
     title: Test the library
     description: Test the library for defects
     tasks:
       jest:
-        title: Run unit tests using Jest
+        title: Run the unit tests with Jest
         description: Use the Jest framework to run unit test (deprecated)
-        parameters:
-          fix:
-            description: Fix the snapshots
-            flags: '--fix'
+        motivation: Check that the units of code behave as intended
+        parameters: {}
         steps:
           - a: batch
-            name: Test
-            title: Run the jest unit tests
+            name: main
+            title: Run Jest unit tests 
             commands:
               - name: test
                 title: Test all test files in test folder
                 run: npx baldrick-dev-ts test check
-  compile:
-    title: Compile source code
-    description: Compile typescript source code
+      spec:
+        title: Run unit tests declaratively
+        description: Run unit tests for pure functions declaratively using YAML files
+        motivation: Provide test coverage in a concise manner
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            title: Run the baldrick-zest unit tests
+            commands:
+              - name: spec
+                run:  node --loader ts-node/esm .baldrick-zest.ts
+      cli:
+        title: Run client directly
+        description: Run the client with ts-node during development
+        motivation: Simulate a CLI app in development without the need to install it globally
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            title: Run the CLI using ts-node
+            commands:
+              - name: cli
+                run:  node --loader ts-node/esm src/cli.mts
+  transpile:
+    title: Transpile the source code
+    description: Transpile source code
     tasks:
-      build:
-        title: Generate javascript
+      ts:
+        title: Transpile typescript
         description: Generate javascript from the typescript source code
+        motivation: Javascript code is more portable and can be consumed by other projects
         parameters:
           fix:
             description: The output directory
             flags: '--outDir'
         steps:
           - a: batch
-            name: compile
+            name: main
             title: Compile the typescript code
             commands:
               - name: clean
                 title: Delete dist folder
                 run: rm -rf dist
-              - name: tsc
+              - name: transpile
                 title: Compile with typescript
                 run: tsc --outDir dist
-      doc:
+  doc:
+    title: Generate the documentation
+    description: Generate the documentation automatically
+    tasks:
+      ts:
         title: Generate documentation
-        description: Generate the documentation based on the source code
+        description: Generate the markdown documentation for the typescript project
+        motivation: Good documentation is essential for developer experience
         parameters:
           fix:
             description: The output directory
@@ -88,30 +136,30 @@ workflows:
                 run: baldrick markdown fix
               - name: github
                 run: baldrick markdown fix -s .github/
+
   github:
-    title: Generate documentation
+    title: Management of the github project
     description: Generate the documentation based on the source code
     tasks:
       standard:
-        title: Standard
-        description: Standard
-        parameters:
-          fix:
-            description: aaa
-            flags: '--fix'
+        title: Standardize the github  repository
+        description: Enable useful features for the github project repository
+        motivation: Create consistent settings
+        parameters: {}
         steps:
           - a: batch
-            name: edit
+            name: main
             commands:
               - name: edit
                 run: gh repo edit --delete-branch-on-merge --enable-squash-merge
   lint:
     title: Static code analysis
-    description: Find problems in Typescript code
+    description: Find problems in the code base
     tasks:
       check:
         title: Static code analysis of Typescript code
-        description: Static code analysis of Typescript code
+        description: Find problems in Typescript code
+        motivation:  Make the code more consistent and avoid bugs
         parameters: {}
         steps:
           - a: batch
@@ -122,8 +170,9 @@ workflows:
                 title: Lint check sources
                 run: baldrick lint check -s src test
       fix:
-        title: Static code analysis of Typescript code
-        description: Static code analysis of Typescript code
+        title: Fix static code analysis
+        description: Fix problems in Typescript code
+        motivation: Facilitate routine maintenance of code
         parameters: {}
         steps:
           - a: batch
@@ -136,7 +185,9 @@ workflows:
     description: Manage markdown documentation
     tasks:
       check:
-        title: Checks markdown documentation
+        title: Check Markdown files
+        description: Checks that the markdown documents follows some consistent guidelines
+        motivation: Make the markdown documents consistent in style
         parameters: {}
         steps:
           - a: batch
@@ -149,7 +200,9 @@ workflows:
                 title: Check markdown files in github
                 run: baldrick markdown check -s .github/
       fix:
-        title: Fixes markdown documentation
+        title: Fix Markdown files
+        description: Modify the markdown documents to ensure they follow some consistent guidelines
+        motivation: Make the markdown documents consistent in style
         parameters: {}
         steps:
           - a: batch
@@ -162,10 +215,12 @@ workflows:
                 title: Fix markdown files in github
                 run: baldrick markdown fix -s .github/
   release:
-    title: Prepare for release
+    title: Release of the library
     tasks:
       ready:
-        title: Check that the library is ready to be published
+        title: Ready for publishing
+        description: Run a sequence of commands to check that the library is ready to be published
+        motivation: Detect quality flaws before pushing the code
         parameters: {}
         steps:
           - a: batch
@@ -193,6 +248,8 @@ workflows:
     tasks:
       norm:
         title: Normalize the project
+        description: Normalize the project in a similar fashion that the other typescript projects
+        motivation: Make the project structure consistent and easier to navigate
         parameters: {}
         steps:
           - a: batch
