@@ -2,7 +2,8 @@
 model:
   project:
     title: Creative ways to cook your objects
-    description: The main motivation is to boost the writing of unit tests by simplifying the process of creating new data content. 
+    description:
+      The main motivation is to boost the writing of unit tests by simplifying the process of creating new data content.
       This is achieved by mutating programmatically existing data
     media: logo.png
   readme:
@@ -18,16 +19,18 @@ model:
       media: usage.png
       link: USAGE.md
     links:
-      - "[Usage](USAGE.md)"
+      - '[Usage](USAGE.md)'
     related:
-      - "[baldrick-zest-engine](https://github.com/flarebyte/baldrick-zest-engine) Run tests declaratively with a few cunning plans"
+      - '[baldrick-zest-engine](https://github.com/flarebyte/baldrick-zest-engine) Run tests declaratively with a few cunning plans'
   github:
     account: flarebyte
     name: object-crumble
   copyright:
-    holder: Flarebyte.com Ltd
+    holder: Flarebyte.com
     startYear: 2021
   license: MIT
+  codacy:
+    projectId: 60b7f9751c214b0fa16ef3a6acf6c2c8 
 binaries:
   sh:
     title: Title of sh
@@ -50,7 +53,7 @@ workflows:
         steps:
           - a: batch
             name: main
-            title: Run Jest unit tests 
+            title: Run Jest unit tests
             commands:
               - name: test
                 title: Test all test files in test folder
@@ -66,7 +69,7 @@ workflows:
             title: Run the baldrick-zest unit tests
             commands:
               - name: spec
-                run:  node --loader ts-node/esm .baldrick-zest.ts
+                run: node --loader ts-node/esm .baldrick-zest.ts
       cli:
         title: Run client directly
         description: Run the client with ts-node during development
@@ -78,7 +81,7 @@ workflows:
             title: Run the CLI using ts-node
             commands:
               - name: cli
-                run:  node --loader ts-node/esm src/cli.mts
+                run: node --loader ts-node/esm src/cli.mts
   transpile:
     title: Transpile the source code
     description: Transpile source code
@@ -159,7 +162,7 @@ workflows:
       check:
         title: Static code analysis of Typescript code
         description: Find problems in Typescript code
-        motivation:  Make the code more consistent and avoid bugs
+        motivation: Make the code more consistent and avoid bugs
         parameters: {}
         steps:
           - a: batch
@@ -246,6 +249,19 @@ workflows:
   scaffold:
     title: Scaffolding for the project
     tasks:
+      upgrade:
+        title: Upgrade baldrick-broth configuration to latest version
+        description: Gets the latest version of this configuration file
+        motivation: Always apply the latest project conventions
+        parameters: {}
+        steps:
+          - a: batch
+            name: main
+            commands:
+              - name: backup
+                run: dasel select -f baldrick-broth.yaml "model"
+              - name: merge
+                run: npx baldrick-whisker@latest object baldrick-broth.yaml temp/baldrick-broth.yaml github:flarebyte:baldrick-reserve:data/ts/baldrick-broth.yaml
       norm:
         title: Normalize the project
         description: Normalize the project in a similar fashion that the other typescript projects
@@ -275,4 +291,7 @@ workflows:
                 run: npx baldrick-whisker@latest render baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/ts/pull-request-template.hbs .github/pull_request_template.md
               - name: glossary
                 run: npx baldrick-whisker@latest render github:flarebyte:baldrick-reserve:data/glossary.yaml github:flarebyte:baldrick-reserve:template/glossary.hbs GLOSSARY.md
-
+              - name: vscode-settings
+                run: npx baldrick-whisker@latest object .vscode/settings.json github:flarebyte:baldrick-reserve:data/ts/vscode-settings.json --no-overwrite
+              - name: decisions
+                run: npx baldrick-whisker@latest render baldrick-broth.yaml github:flarebyte:baldrick-reserve:template/decisions.hbs DECISIONS.md --no-overwrite
