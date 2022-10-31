@@ -249,9 +249,7 @@ workflows:
                     url: https://daseldocs.tomwright.me/
               - name: save-model
                 stdin: data.scaffold::upgrade::model
-                run: cat
-                onSuccess:
-                  - debug
+                run: sponge temp/baldrick-broth-model.yaml
                 links:
                   - title: sponge from moreutils homepage 
                     url: https://formulae.brew.sh/formula/moreutils
