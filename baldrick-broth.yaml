@@ -240,7 +240,7 @@ workflows:
             name: main
             commands:
               - name: model
-                run: dasel select -f baldrick-broth.yaml "model"
+                run:  dasel select -f baldrick-broth.yaml model
                 onSuccess:
                   - silent
                   - save
@@ -248,8 +248,10 @@ workflows:
                   - title: Dasel homepage
                     url: https://daseldocs.tomwright.me/
               - name: save-model
-                stdin: build.model.project.title2
+                stdin: data.scaffold::upgrade::model
                 run: cat
+                onSuccess:
+                  - debug
                 links:
                   - title: sponge from moreutils homepage 
                     url: https://formulae.brew.sh/formula/moreutils
