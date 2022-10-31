@@ -31,15 +31,6 @@ model:
   license: MIT
   codacy:
     projectId: 60b7f9751c214b0fa16ef3a6acf6c2c8 
-binaries:
-  sh:
-    title: Title of sh
-    description: Description of sh
-    motivation: Motivation of sh
-    homepage: https://website.com/sh
-    shell:
-      run: sh
-      diagnosis: sh --version
 workflows:
   test:
     title: Test the library
@@ -49,11 +40,13 @@ workflows:
         title: Run the unit tests with Jest
         description: Use the Jest framework to run unit test (deprecated)
         motivation: Check that the units of code behave as intended
-        parameters: {}
         steps:
           - a: batch
             name: main
             title: Run Jest unit tests
+            links:
+              - title: Jest homepage
+                url: https://jestjs.io/
             commands:
               - name: test
                 title: Test all test files in test folder
@@ -62,7 +55,6 @@ workflows:
         title: Run unit tests declaratively
         description: Run unit tests for pure functions declaratively using YAML files
         motivation: Provide test coverage in a concise manner
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -74,7 +66,6 @@ workflows:
         title: Run client directly
         description: Run the client with ts-node during development
         motivation: Simulate a CLI app in development without the need to install it globally
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -91,8 +82,7 @@ workflows:
         description: Generate javascript from the typescript source code
         motivation: Javascript code is more portable and can be consumed by other projects
         parameters:
-          fix:
-            description: The output directory
+          - description: The output directory
             flags: '--outDir'
         steps:
           - a: batch
@@ -114,8 +104,7 @@ workflows:
         description: Generate the markdown documentation for the typescript project
         motivation: Good documentation is essential for developer experience
         parameters:
-          fix:
-            description: The output directory
+          - description: The output directory
             flags: '--outDir'
         steps:
           - a: batch
@@ -139,7 +128,6 @@ workflows:
                 run: baldrick markdown fix
               - name: github
                 run: baldrick markdown fix -s .github/
-
   github:
     title: Management of the github project
     description: Generate the documentation based on the source code
@@ -148,7 +136,6 @@ workflows:
         title: Standardize the github  repository
         description: Enable useful features for the github project repository
         motivation: Create consistent settings
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -163,7 +150,6 @@ workflows:
         title: Static code analysis of Typescript code
         description: Find problems in Typescript code
         motivation: Make the code more consistent and avoid bugs
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -176,7 +162,6 @@ workflows:
         title: Fix static code analysis
         description: Fix problems in Typescript code
         motivation: Facilitate routine maintenance of code
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -191,7 +176,6 @@ workflows:
         title: Check Markdown files
         description: Checks that the markdown documents follows some consistent guidelines
         motivation: Make the markdown documents consistent in style
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -206,7 +190,6 @@ workflows:
         title: Fix Markdown files
         description: Modify the markdown documents to ensure they follow some consistent guidelines
         motivation: Make the markdown documents consistent in style
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -224,7 +207,6 @@ workflows:
         title: Ready for publishing
         description: Run a sequence of commands to check that the library is ready to be published
         motivation: Detect quality flaws before pushing the code
-        parameters: {}
         steps:
           - a: batch
             name: main
@@ -253,20 +235,30 @@ workflows:
         title: Upgrade baldrick-broth configuration to latest version
         description: Gets the latest version of this configuration file
         motivation: Always apply the latest project conventions
-        parameters: {}
         steps:
           - a: batch
             name: main
             commands:
-              - name: backup
+              - name: model
                 run: dasel select -f baldrick-broth.yaml "model"
-              - name: merge
-                run: npx baldrick-whisker@latest object baldrick-broth.yaml temp/baldrick-broth.yaml github:flarebyte:baldrick-reserve:data/ts/baldrick-broth.yaml
+                onSuccess:
+                  - silent
+                  - save
+                links:
+                  - title: Dasel homepage
+                    url: https://daseldocs.tomwright.me/
+              - name: save-model
+                stdin: build.model.project.title2
+                run: cat
+                links:
+                  - title: sponge from moreutils homepage 
+                    url: https://formulae.brew.sh/formula/moreutils
+              # - name: merge
+              #   run: npx baldrick-whisker@latest object baldrick-broth.yaml temp/baldrick-broth.yaml github:flarebyte:baldrick-reserve:data/ts/baldrick-broth.yaml
       norm:
         title: Normalize the project
         description: Normalize the project in a similar fashion that the other typescript projects
         motivation: Make the project structure consistent and easier to navigate
-        parameters: {}
         steps:
           - a: batch
             name: main
